@@ -29,7 +29,7 @@ old_path=[os.path.join(download_dir,i) for i in new_path]
 new_path=[os.path.join(download_dir,i[7:15]) for i in new_path]
 
 counter=0
-for i in range(len(old_path)-1):
+for i in range(len(old_path)):
     with zipfile.ZipFile(old_path[counter], 'r') as zip_ref:
         zip_ref.extractall(os.path.join(download_dir,'tempt'))
         shutil.move(os.path.join(download_dir,'tempt',os.listdir(os.path.join(download_dir,'tempt'))[0]),os.path.join(output_dir,number(start,counter)+'_Tacview.acmi'))
