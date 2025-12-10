@@ -11,3 +11,9 @@ First, you need to download such a 'raw' document ending with **'.zip.acmi'** th
 # Organise
 Please run the code file **'solvedata.py'**. Once you have done the part Download, you would get a pile of files with the end of '.acmi'. And their folder is the source which is the first folder you selected. Mention : please only select ***folder***. The next one you select is the existing folder whatever you want. For a single file, it might takes 1 to 2 mins to complete. If you think this is time consuming, you could update this and inform me. And there is a really embarrassing problem my teammate met caused by ***tqdm***. To solve this, the best way is to install **anaconda** which is totally free and of help. If your team do not encouter this, you are ,indeed, lucky. If all steps are down, you will have access to such a type of document we defined, which is the base of all this project. 
 note: if your computer owes **a powerfull cpu**, please try to use 'solvedata_多进程版.py'. Set the variable prcss_max_num to the num. no more than the number of core in cpu. And set the start number, usually **0**, and the end number depenging on the number of your files. And we recommend to set ifclean to be **1**.
+
+# Tutorial Videos
+Please click [here](https://pan.baidu.com/s/1zX-o9O5NkFVzAS_DHWGj_A?pwd=xxsm) to watch the tutorials.
+
+# Preprocessed Data
+Please click [here](https://pan.baidu.com/s/1ruI0Q5uD7yv_09Fc93ktoA?pwd=xxsm) to access to the flights data that have already been processed before being set as the input into neural networks.
