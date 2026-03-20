@@ -17,3 +17,37 @@ Please click [here](https://pan.baidu.com/s/1zX-o9O5NkFVzAS_DHWGj_A?pwd=xxsm) to
 
 # Preprocessed Data
 Please click [here](https://pan.baidu.com/s/1ruI0Q5uD7yv_09Fc93ktoA?pwd=xxsm) to access to the flights data that have already been processed before being set as the input into neural networks.
+
+## Visualization Tools
+In the visualization folder, we provide several scripts to help you intuitively understand the raw numerical data.
+
+* **3D Trajectory Visualization:** The file `飞行轨迹数据可视化.py` maps the longitude, latitude, and altitude of specific aircraft into an interactive 3D scatter plot using Plotly.
+* **Altitude Tracking:** The script `高度可视化.py` plots altitude changes over time using Matplotlib.
+* **Aircraft 3D Modeling:** `绘制飞机模型3D图像.py` generates a basic 3D geometric representation of the aircraft to help visualize its posture dynamically.
+
+## Rule-Based Action Recognition
+Before training neural networks, we must extract specific, meaningful maneuvers from the continuous flight data. The scripts in the action recognition folder act as a probe to slice the data based on physical rules and mathematical thresholds.
+
+* We identify specific actions by analyzing continuous monotonicity and variance limits: Roll (`横滚识别.py`), Loop/Pitch (`筋斗识别.py`), Circle/Yaw (`转圈识别.py`), and Rapid Climb/Descent (`快速上升下降识别.py`).
+* **Multiprocessing:** To process large datasets efficiently, we highly recommend using the multiprocessing version (`动作识别_多进程版.py`). This script leverages multiple CPU cores to perform the action extraction simultaneously, significantly saving time.
+
+## Result Classification and Preprocessing
+Once the fragmented action data is generated, scripts like `归类结果.py` and `攀升俯冲分离.py` help aggregate and clean the results. For example, it separates generic rapid altitude changes into distinct "Climb" and "Descent" directories, preparing a clean, labeled database for the neural networks.
+
+## Deep Learning Models
+We approached the recognition task using two distinct deep learning methods.
+
+### Approach 1: FCNN with Angle Features
+This method treats the flight data as numerical time-series arrays.
+
+* **Data Generator (`神经网络数据生成器.py`):** Converts the raw spatial coordinates into relative angle features. This makes the data translation-invariant and focuses strictly on the aircraft's relative movements.
+* **Model Trainer (`神经网络训练器.py`):** Feeds these engineered angle features into a Fully Connected Neural Network (FCNN) to classify the flight maneuvers.
+
+### Approach 2: CNN with 2D Image Projection
+This is a novel approach that converts the time-series tracking problem into an image classification problem, allowing us to leverage computer vision techniques.
+
+* **Image Generator (`投影彩色图片化生成器.py`):** Uses Principal Component Analysis (PCA) to project the 3D flight trajectory onto optimal 2D planes. It assigns specific RGB color channels to different parts of the aircraft (e.g., Head, Wings, Tail) so the posture changes are baked into the color gradients of the generated images.
+* **Model Trainer (`CNN.py`):** Trains a Convolutional Neural Network (CNN) on these generated images. The script automatically evaluates categorical accuracy, saves the best-performing model (`.h5` file), and generates performance graphs comparing training and validation loss/accuracy.
+
+
+
